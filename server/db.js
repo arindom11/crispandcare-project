@@ -88,7 +88,17 @@ async function makePostgres() {
 // SQLite (local development) — a single file, zero setup, works offline.
 // ---------------------------------------------------------------------------
 async function makeSqlite() {
-  const { default: Database } = await import('better-sqlite3')
+  let Database
+  try {
+    Database = (await import('better-sqlite3')).default
+  } catch (err) {
+    throw new Error(
+      'DATABASE_URL is not set, so the app tried to use the local SQLite database — ' +
+        'but the better-sqlite3 driver is not installed in this environment. ' +
+        'In production (e.g. Render), set the DATABASE_URL environment variable to your ' +
+        'Postgres connection string (from Neon), then redeploy. Original error: ' + err.message,
+    )
+  }
   const { fileURLToPath } = await import('node:url')
   const { dirname, join } = await import('node:path')
   const { mkdirSync } = await import('node:fs')
