@@ -1,0 +1,25 @@
+# Render blueprint — one free web service that builds the React site and runs the
+# Express API + built frontend together. Secrets are set in the Render dashboard
+# (sync: false = "I'll type this in myself"), never committed to git.
+services:
+  - type: web
+    name: crisp-and-care
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL # Neon Postgres connection string (orders persist here)
+        sync: false
+      - key: ADMIN_PASSWORD # password for the /admin orders page
+        sync: false
+      - key: UPI_ID # your UPI ID for the "Pay by UPI QR" option
+        sync: false
+      - key: UPI_PAYEE_NAME
+        value: Crisp & Care
+      - key: RAZORPAY_KEY_ID # optional — leave unset for UPI/COD only
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false

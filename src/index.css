@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    @apply bg-background text-ink font-body;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background-color: #C08A34;
+    color: #FAF6EF;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #FAF6EF;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #E4C58A;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #C08A34;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-12;
+  }
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.28em] text-primary-dark;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5
+      font-medium text-white shadow-soft transition-all duration-300
+      hover:bg-primary-dark hover:shadow-lift active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-accent/25
+      px-7 py-3.5 font-medium text-accent transition-all duration-300
+      hover:border-accent hover:bg-accent hover:text-white;
+  }
+  .card {
+    @apply rounded-4xl border border-divider bg-surface shadow-soft;
+  }
+  .link-underline {
+    @apply relative after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0
+      after:bg-primary after:transition-all after:duration-300 hover:after:w-full;
+  }
+}
+
+/* Fabric grain overlay for hero sections */
+.weave-overlay {
+  background-image:
+    linear-gradient(rgba(36, 31, 46, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(36, 31, 46, 0.02) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+}
